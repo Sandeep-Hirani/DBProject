@@ -6,6 +6,7 @@
 <?php
     include 'theme.php';
   ?>
+  
 <body>
  <nav class="container p-5">
     <center>Product Insertion </center>
@@ -32,10 +33,14 @@
         
     </form>
   </nav>
+
+  <div class="card">  
+  <div class="card-body">
   <nav>
     <?php 
 extract($_POST); 
   include 'connection.php';
+  echo '<div class="card-body">';
   $data =  '<table Class ="table table-striped">
             <tr class>
                 <th>Product Code</th> 
@@ -73,22 +78,26 @@ extract($_POST);
       } 
     }  
     $data .= '</table>';
+
     echo $data;
+    echo '</div>';
     CloseCon($conn);
 ?>
 <script>
     function DeleteUser(varJS) 
     {
-      var page='http://localhost/Database/DeleteProduct.php?varJS='+varJS;
+      var page='deleteProduct.php?varJS='+varJS;
       document.location.href=page;
     }
     function edit(varJS) 
     {
-      var page='http://localhost/Database/updateProduct.php?varJS='+varJS;
+      var page='updateProduct.php?varJS='+varJS;
       document.location.href=page;
     }
   </script>
 
   </nav>
+</div>
+</div>
 </body>
 </html>

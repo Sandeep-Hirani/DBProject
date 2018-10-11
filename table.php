@@ -1,0 +1,138 @@
+<script type="text/javascript" src="js/javas.js"></script> 
+   <script type="text/javascript" src="js/jquery.js"></script> 
+<div class="card">  
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x"
+            aria-hidden="true"></i></a></span>
+      <table id = "myTable" class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+          <th class="text-center">Order No</th>
+          <th class="text-center">Customer</th>
+          <th class="text-center">Date</th>
+          <?php
+            session_start();
+
+                  if ( session_id()==1) {
+                    echo "<th class='text-center'>Sales Person</th>";
+                  }
+          ?>
+          
+          <th class="text-center">Product</th>
+          <th class="text-center">Quantity</th>
+          <th class="text-center">Rate</th>
+          <th class="text-center">Amount</th>
+          <th class="text-center">Button</th>
+        </thead>     
+         <?php
+         $val = $_POST["var"];
+          include 'connection.php';
+          $conn = OpenCon();
+      $sql0 = "SELECT * FROM salesorder_13142 where cusID = '$val'";    
+      $result0 = mysqli_query($conn, $sql0);
+      while($row = mysqli_fetch_array($result0)) 
+      {
+        $pro = $row['product'];
+        $product  = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM product_13142 WHERE ProductCode = '$pro'"));
+        $out = $row['orderNo'];
+        echo "<tr>";
+        echo "<td class='pt-3-half' contenteditable='false'>".$row['orderNo']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['cusID']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['orderdate']."</td>";
+        if(session_id()==1){
+
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['orderNo']."</td>";
+      }
+        echo "<td class='pt-3-half' contenteditable='true'>".$product['Brand']." - ".$product['Type']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['quantity']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['rate']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['amount']."</td>";
+        echo "<td>
+             <span class='table-edit'><button type='button' onclick='editOrder(this.value)' class='btn btn-dark btn-rounded btn-sm my-0'>Save</button></span>
+              <button type='button' onclick='delOrder($out)' class='btn btn-danger btn-rounded btn-sm my-0'>Remove</button>
+          </td>";
+        echo "</tr>";
+      } 
+      ?>
+          <div id = "dvid">
+            <tfoot>
+          <td class="pt-3-half" contenteditable="false"></td>
+          <td class="pt-3-half" contenteditable="true"></td>
+          <td class="pt-3-half" contenteditable="true"></td>
+          <?php 
+          if(session_id()==1){
+                  echo "<td class='pt-3-half' contenteditable='true'></td>";
+          }
+                            $sessionID = session_id();
+           ?>
+  
+          <td> 
+            <select class="form-control" id = "assigned" name="assigned" onchange='changeAction(this.value, <?php echo $sessionID; ?> )'>
+            <option disabled="" selected="" value="">Assign Salesperson</option> 
+                        <?php
+                        $result1 = mysqli_query($conn, "SELECT * FROM product_13142 ");
+                        while($row1 = mysqli_fetch_array($result1)) 
+                        {
+                          echo "<option value = '{$row1['ProductCode'] }'";
+                          echo ">{$row1['Type'] } - {$row1['Shade'] } - {$row1['Size'] }</option>";
+                        }
+                      ?>
+            </select>
+
+          </td>
+          <td class="pt-3-half" contenteditable="true">1</td>
+          <!-- <td><input value = "1" class="pt-3-half" contenteditable="true" min="1" name="Quantity"  type="number" style="width: 7em"></td> -->
+          <td class="pt-3-half" contenteditable="true"></td>
+          <td class="pt-3-half" contenteditable="true"></td>
+          <td>
+            <span class="table-add"><button id ="addButton" type="button"  onclick="javafunction()" class="btn btn-primary btn-rounded btn-sm my-0">Add</button></span>
+          </td>
+        </tfoot>
+        </div>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.table-edit').click(function () {
+   
+ // $(document).('click', '.table-edit', function(){
+ // function editOrder(){ 
+      
+var row = $(this).closest("tr");
+var c0 = row.find('td:eq(0)').text();
+var c2 = row.find('td:eq(1)').text();
+var c3 = row.find('td:eq(2)').text();
+var c4 = row.find('td:eq(3)').text();
+var c5 = row.find('td:eq(4)').text();
+var c6 = row.find('td:eq(5)').text();
+var c7 = row.find('td:eq(6)').text();
+var c8 = row.find('td:eq(7)').text();
+alert(c0);
+
+    $.ajax({
+      url:"salesOrderOperation.php",
+      type:"POST",
+      data:{
+        c0:c0,
+        c1:"edit",
+        c2:c2,
+        c3:c3,
+        c4:c4,
+        c5:c5,
+        c6:c6,
+        c7: c7,
+        c8: c6*c7,
+      },
+      success:function(data,status){
+         // $( "#myTable" ).load( " #myTable" );
+         editOrder();
+      },
+
+    });
+  
+});
+
+
+
+</script>

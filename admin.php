@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <style>
-p.serif {
-    font-family: "Times New Roman", Times, serif;
-       font-size: 80px;
-}
-</style>
 
-</head>
 
     <body>
+
+         <style>
+.center {
+    
+        font-family: "Times New Roman", Times, serif;
+        text-align: center;
+  
+}​
+</style>
     	<?php 
 
     	include 'theme.php';
     	 ?>
 
-    	    <center><p class="serif">Welcome Mr. Admin, this idfds sandeep hirani</p></center>
-<?php 
-
+    	  <div class="center"><h1>Welcome Admin</h1></div>
+<div class="card-body">
+<?php
     include 'connection.php';
 extract($_POST); 
  
   $data =  '<table Class ="table table-striped">
             <tr class>
-                <th>CustomerID</th> 
-                <th>Seller Name</th> 
-                <th>Customer Name</th>
+                <th>Customer Name</th> 
+                
+                <th>Assigned SalesPerson</th>
             </tr>'; 
    
     $conn = OpenCon();    
@@ -46,7 +47,6 @@ extract($_POST);
       {
         $data .= '<tr>  
         <td>'.$row['SName'].'</td>
-        <td>'.$row['CusID'].'</td>
         <td>'.$row['Name'].'</td>
         </td></tr>';
   	  }	
@@ -56,7 +56,7 @@ extract($_POST);
     CloseCon($conn);
 ?>
 </table>
-   
+   </div>
     </body>
  
 

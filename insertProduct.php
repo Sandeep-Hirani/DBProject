@@ -19,6 +19,6 @@
     }
 
     CloseCon($conn);
-    header("Location: http://localhost/Database/product.php");
+    header("Location:product.php");
 die();
 ?>

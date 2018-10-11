@@ -5,8 +5,23 @@
     <style>
 p.serif {
     font-family: "Times New Roman", Times, serif;
-       font-size: 80px;
+       font-size: 100px;
 }
+.center {
+    
+        font-family: "Times New Roman", Times, serif;
+        text-align: center;
+      	font-size: 50px;  
+      	
+    
+    background: white;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -300px;
+}​
 </style>
 
 </head>
@@ -35,6 +50,7 @@ p.serif {
          ?>
    
     </body>
-    <center><p class="serif">Welcome, Mr. <?php echo $out ?></p></center>
+    <!-- <center><p class="serif">Welcome, Mr. <?php echo $out ?></p></center> -->
+    	  <div class="center">Welcome, Mr. <?php echo $out ?></div>
 
 </html>

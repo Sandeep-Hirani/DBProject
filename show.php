@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <?php 
       include 'theme.php';
     ?>
 <body>
+
  <nav class="container p-5">
-    <center>INSERTION TABLE</center>
+  <center><h3>INSERTION TABLE</h3></center>
     <form action="insert.php" method="post">
         <div class="form-group">
             <input class="form-control" name="SID" placeholder= "Shop ID" type="text"/></div>
         <div class="form-group">
-            <input class="form-control" name="SName" placeholder= "Seller Name" type="text"/></div>
+            <input class="form-control" name="SName" placeholder= "Shop Name" type="text"/></div>
          <div class="form-group">
             <input class="form-control" name="CName" placeholder= "Customer Name" type="text"/></div>
          <div class="form-group">
@@ -40,14 +42,15 @@
         <button class="btn btn-primary"   text-align: "center" type="submit">Insert</button>
     </form>
   </nav>
-  <div>
+  <div class="card">  
+  <div class="card-body">
 <?php 
 extract($_POST); 
  
   $data =  '<table Class ="table table-striped">
             <tr class>
                 <th>CustomerID</th> 
-                <th>Seller Name</th> 
+                <th>Shop Name</th> 
                 <th>Customer Name</th>
                 <th>Customer No</th> 
                 <th>Address</th> 
@@ -87,18 +90,19 @@ extract($_POST);
     echo $data;
     CloseCon($conn);
 ?>
-</div>
+
 </table>
- 
+ </div>
+</div>
   <script>
     function DeleteUser(varJS) 
     {
-      var page='http://localhost/Database/Delete.php?varJS='+varJS;
+      var page='delete.php?varJS='+varJS;
       document.location.href=page;
     }
     function edit(varJS) 
     {
-      var page='http://localhost/Database/update.php?varJS='+varJS;
+      var page='update.php?varJS='+varJS;
       document.location.href=page;
     }
   </script>

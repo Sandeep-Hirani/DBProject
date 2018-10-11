@@ -73,12 +73,24 @@ extract($_POST);
 <script>
     function DeleteUser(varJS) 
     {
-      var page='http://localhost/Database/DeleteUser.php?varJS='+varJS;
-      document.location.href=page;
+    $.ajax({
+
+      url:"deleteUser.php",
+      type:"POST",
+      data:{
+        c1:"deleteUser",
+        c2:varJS
+       
+      },
+      success:function(data){
+         location.reload();
+      },
+        
+    });
     }
     function edit(varJS) 
     {
-      var page='http://localhost/Database/updateUser.php?varJS='+varJS;
+      var page='updateUser.php?varJS='+varJS;
       document.location.href=page;
     }
   </script>

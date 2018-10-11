@@ -37,6 +37,7 @@
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/product.php">Add Product</a></li>';
                             if (session_id()==1) {
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/user.php">Users</a></li>';
+                                echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesorder.php">Sales Order</a></li>';
                             }else
                             {
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesorder.php">Sales Order</a></li>';

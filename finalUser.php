@@ -30,6 +30,6 @@
     }
 
     CloseCon($conn);
-    header("Location: http://localhost/Database/user.php");
+    header("Location:user.php");
 die();
 ?>

@@ -17,9 +17,9 @@
         session_id( $ID );
         session_start();
         if($ID == 1){
-            header("Location: http://localhost/Database/admin.php");    
+            header("Location:admin.php");    
         }else{
-            header("Location: http://localhost/Database/salesPerson.php");    
+            header("Location:salesPerson.php");    
         }
         
       }else{

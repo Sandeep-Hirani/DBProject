@@ -41,6 +41,6 @@
     }
 
     CloseCon($conn);
-    header("Location: http://localhost/Database/show.php");
+    header("Location:show.php");
 die();
 ?>
