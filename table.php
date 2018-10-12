@@ -28,7 +28,14 @@
          $val = $_POST["var"];
           include 'connection.php';
           $conn = OpenCon();
-      $sql0 = "SELECT * FROM salesorder_13142 where cusID = '$val'";    
+          $currentid = session_id();
+          if($currentid == 1){
+
+              $sql0 = "SELECT * FROM salesorder_13142 where cusID = '$val'";    
+          }else{
+              $sql0 = "SELECT * FROM salesorder_13142 where cusID = '$val' AND salesID = '$currentid'";          
+          }
+      
       $result0 = mysqli_query($conn, $sql0);
       while($row = mysqli_fetch_array($result0)) 
       {
@@ -41,9 +48,9 @@
         echo "<td class='pt-3-half' contenteditable='true'>".$row['orderdate']."</td>";
         if(session_id()==1){
 
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['orderNo']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['salesID']."</td>";
       }
-        echo "<td class='pt-3-half' contenteditable='true'>".$product['Brand']." - ".$product['Type']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$product['ProductCode']." - ".$product['Brand']." -".$product['Type']." - ".$product['Shade']." -".$product['Size']."</td>";
         echo "<td class='pt-3-half' contenteditable='true'>".$row['quantity']."</td>";
         echo "<td class='pt-3-half' contenteditable='true'>".$row['rate']."</td>";
         echo "<td class='pt-3-half' contenteditable='true'>".$row['amount']."</td>";
@@ -68,13 +75,13 @@
   
           <td> 
             <select class="form-control" id = "assigned" name="assigned" onchange='changeAction(this.value, <?php echo $sessionID; ?> )'>
-            <option disabled="" selected="" value="">Assign Salesperson</option> 
+            <option disabled="" selected="" value="">Select Product</option> 
                         <?php
                         $result1 = mysqli_query($conn, "SELECT * FROM product_13142 ");
                         while($row1 = mysqli_fetch_array($result1)) 
                         {
                           echo "<option value = '{$row1['ProductCode'] }'";
-                          echo ">{$row1['Type'] } - {$row1['Shade'] } - {$row1['Size'] }</option>";
+                          echo ">{$row1['ProductCode'] }- {$row1['Type'] } - {$row1['Shade'] } - {$row1['Size'] }</option>";
                         }
                       ?>
             </select>
@@ -85,7 +92,7 @@
           <td class="pt-3-half" contenteditable="true"></td>
           <td class="pt-3-half" contenteditable="true"></td>
           <td>
-            <span class="table-add"><button id ="addButton" type="button"  onclick="javafunction()" class="btn btn-primary btn-rounded btn-sm my-0">Add</button></span>
+            <span class="table-add"><button id ="addButton" type="button"  onclick="javafunction(<?php echo $sessionID; ?>)" class="btn btn-primary btn-rounded btn-sm my-0">Add</button></span>
           </td>
         </tfoot>
         </div>
@@ -99,16 +106,32 @@
  // $(document).('click', '.table-edit', function(){
  // function editOrder(){ 
       
+      var val = <?php echo session_id()?>;
+      
 var row = $(this).closest("tr");
+
+
+
+var temp = row.find('td:eq(4)').text().substring(0,2);
+var can = Number(temp);
+
+alert(can);
 var c0 = row.find('td:eq(0)').text();
 var c2 = row.find('td:eq(1)').text();
 var c3 = row.find('td:eq(2)').text();
+if(val ==1){
 var c4 = row.find('td:eq(3)').text();
-var c5 = row.find('td:eq(4)').text();
+var c5 = can;
 var c6 = row.find('td:eq(5)').text();
 var c7 = row.find('td:eq(6)').text();
 var c8 = row.find('td:eq(7)').text();
-alert(c0);
+}else{
+var c4 = val;
+var c5 = row.find('td:eq(3)').text();
+var c6 = can;
+var c7 = row.find('td:eq(5)').text();
+var c8 = row.find('td:eq(6)').text();
+}
 
     $.ajax({
       url:"salesOrderOperation.php",

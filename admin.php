@@ -18,7 +18,7 @@
     	include 'theme.php';
     	 ?>
 
-    	  <div class="center"><h1>Welcome Admin</h1></div>
+    	  <div class="center"><h1>Welcome, Mr. Admin</h1></div>
 <div class="card-body">
 <?php
     include 'connection.php';
