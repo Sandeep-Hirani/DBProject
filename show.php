@@ -10,19 +10,19 @@
   <center><h3>INSERTION TABLE</h3></center>
     <form action="insert.php" method="post">
         <div class="form-group">
-            <input class="form-control" name="SID" placeholder= "Shop ID" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="SID" placeholder= "Shop ID" type="text"/></div>
         <div class="form-group">
-            <input class="form-control" name="SName" placeholder= "Shop Name" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="SName" placeholder= "Shop Name" type="text"/></div>
          <div class="form-group">
-            <input class="form-control" name="CName" placeholder= "Customer Name" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="CName" placeholder= "Customer Name" type="text"/></div>
          <div class="form-group">
-            <input class="form-control" name="CNo" placeholder= "Cell Number" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="CNo" placeholder= "Cell Number" type="text"/></div>
          <div class="form-group">
-            <input class="form-control" name="Address" placeholder= "Address" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="Address" placeholder= "Address" type="text"/></div>
          <div class="form-group">
-            <input class="form-control" name="Area" placeholder= "Area" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="Area" placeholder= "Area" type="text"/></div>
          <div class="form-group">
-            <input class="form-control" name="Country" placeholder= "Country" type="text"/></div>
+            <input autocomplete="off" required autofocus class="form-control" name="Country" placeholder= "Country" type="text"/></div>
         <div class="form-group">
             <select class="form-control" name="assigned">
         <option disabled="" selected="" value="">Assign Salesperson</option> 

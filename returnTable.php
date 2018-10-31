@@ -1,11 +1,28 @@
-<script type="text/javascript" src="js/javas.js"></script> 
+<head>
+    <style>
+p.serif {
+    font-family: "Times New Roman", Times, serif;
+       font-size: 100px;
+}
+.center {
+    
+        font-family: "Times New Roman", Times, serif;
+        text-align: center;
+        font-size: 50px;
+}​
+</style>
+
+</head>
+<script type="text/javascript" src="js/returnJS.js"></script> 
    <script type="text/javascript" src="js/jquery.js"></script> 
 <div class="card">  
   <div class="card-body">
     <div id="table" class="table-editable">
       <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x"
             aria-hidden="true"></i></a></span>
-      <table id = "myTable" class="table table-bordered table-responsive-md table-striped text-center">
+            <center></center>
+              <div class="center">Return Sale Table</div>
+      <table id = "myreturnTable" class="table table-bordered table-responsive-md table-striped text-center">
         <thead>
           <th class="text-center">Order No</th>
           <th class="text-center">Customer</th>
@@ -26,40 +43,44 @@
         </thead>     
          <?php
          $val = $_POST["var"];
+
           include 'connection.php';
           $conn = OpenCon();
           $currentid = session_id();
           if($currentid == 1){
 
-              $sql0 = "SELECT * FROM salesorder_13142 where cusID = '$val'";    
+              $sql0 = "SELECT * FROM salesReturn_13142 where custID = '$val'";    
           }else{
-              $sql0 = "SELECT * FROM salesorder_13142 where cusID = '$val' AND salesID = '$currentid'";          
+              $sql0 = "SELECT * FROM salesReturn_13142 where custID = '$val' AND saleID = '$currentid'";          
           }
       
       $result0 = mysqli_query($conn, $sql0);
+
       while($row = mysqli_fetch_array($result0)) 
       {
-        $pro = $row['product'];
+        $pro = $row['proID'];
+
         $product  = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM product_13142 WHERE ProductCode = '$pro'"));
-        $out = $row['orderNo'];
+        $out = $row['ordNo'];
         echo "<tr>";
-        echo "<td class='pt-3-half' contenteditable='false'>".$row['orderNo']."</td>";
-        echo "<td class='pt-3-half' contenteditable='false'>".$row['cusID']."</td>";
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['orderdate']."</td>";
+        echo "<td class='pt-3-half' contenteditable='false'>".$row['ordNo']."</td>";
+        echo "<td class='pt-3-half' contenteditable='false'>".$row['custID']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['rDate']."</td>";
         if(session_id()==1){
 
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['salesID']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['saleID']."</td>";
       }
         echo "<td class='pt-3-half' contenteditable='true'>".$product['ProductCode']." - ".$product['Brand']." -".$product['Type']." - ".$product['Shade']." -".$product['Size']."</td>";
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['quantity']."</td>";
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['rate']."</td>";
-        echo "<td class='pt-3-half' contenteditable='false'>".$row['amount']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['rQuant']."</td>";
+        echo "<td class='pt-3-half' contenteditable='true'>".$row['rRate']."</td>";
+        echo "<td class='pt-3-half' contenteditable='false'>".$row['rAmount']."</td>";
         echo "<td>
              <span class='table-edit'><button type='button' class='btn btn-dark btn-rounded btn-sm my-0'>Save</button></span>
               <button type='button' onclick='delOrder($out)' class='btn btn-danger btn-rounded btn-sm my-0'>Remove</button>
           </td>";
         echo "</tr>";
       } 
+
       ?>
           <div id = "dvid">
             <tfoot>
@@ -77,10 +98,12 @@
             <select class="form-control" id = "assigned" name="assigned" onchange='changeAction(this.value, <?php echo $sessionID; ?> )'>
             <option disabled="" selected="" value="">Select Product</option> 
                         <?php
-                        $result1 = mysqli_query($conn, "SELECT * FROM product_13142 ");
+
+                        $result1 = mysqli_query($conn, "SELECT * FROM salesorder_13142 ,product_13142 where product = ProductCode 
+                         and cusID = '$val' ");
                         while($row1 = mysqli_fetch_array($result1)) 
                         {
-                          echo "<option value = '{$row1['ProductCode'] }'";
+                          echo "<option value = '{$row1['orderNo'] }'";
                           echo ">{$row1['ProductCode'] }- {$row1['Type'] } - {$row1['Shade'] } - {$row1['Size'] }</option>";
                         }
                       ?>
@@ -94,35 +117,16 @@
           <td>
             <span class="table-add"><button id ="addButton" type="button"  onclick="javafunction(<?php echo $sessionID; ?>)" class="btn btn-primary btn-rounded btn-sm my-0">Add</button></span>
           </td>
-        
         </tfoot>
         </div>
       </table>
     </div>
   </div>
 </div>
-Sales person column is visible in Admin id, because he assigns any sales person to the customer but salesperson can only assign himself. <br />
-To edit, change anything in the field and click save button.(Not all fields are editable) <br / >
-The drop down menu for the will show all the products from the database.
+Sales person column is visible in Admin id, because he can assign any sales person to the customer but salesperson can't change it. <br />
+To edit, change anything in the field and click save button. (Not all fields are editable) <br / >
+The drop down menu for the return sale table will only show the products that has been ordered by that customer. (not all the products)
 <script type="text/javascript">
-  function addCal(){
-var t = document.getElementById('table');
-    var v = t.rows[1].cells[1].innerHTML 
-    //var val1 =$(t.rows[2].cells[4]).text();
-    alert(v)
-     var table = document.getElementById("TableID");
- 
-for (var i = 0, row; row = table.rows[i]; i++) {   
-  //iterate through rows   
-  //rows would be accessed using the "row" variable assigned in   the for loop   
-  for (var j = 0, col; col = row.cells[j]; j++) {     
-    //iterate through columns     
-    //columns would be accessed using the "col" variable assigned in the for loop   
-    alert('da');
-  }  
-}
-
-  }
   $('.table-edit').click(function () {
    
  // $(document).('click', '.table-edit', function(){
@@ -154,7 +158,7 @@ var c8 = row.find('td:eq(6)').text();
 }
 
     $.ajax({
-      url:"salesOrderOperation.php",
+      url:"salesReturnOperation.php",
       type:"POST",
       data:{
         c0:c0,

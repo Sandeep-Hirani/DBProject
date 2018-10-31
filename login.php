@@ -31,10 +31,10 @@
     <main class="container p-5">
        <form action="validateLogin.php" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="username" placeholder="Username" type="text"/>
         </div>
         <div class="form-group">
-            <input class="form-control" name="password" placeholder="Password" type="password"/>
+            <input autocomplete="off" required autofocus class="form-control" name="password" placeholder="Password" type="password"/>
         </div>
         <button class="btn btn-primary" type="submit">Log In</button>
         </form>

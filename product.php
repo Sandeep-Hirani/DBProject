@@ -12,22 +12,22 @@
     <center>Product Insertion </center>
     <form id = "myform" action ="insertProduct.php" method="post">
         <div class="form-group">
-            <input class="form-control" name="Id" placeholder= "Product Code" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Id" placeholder= "Product Code" type="text"/>
         </div>
         <div class="form-group">
-            <input class="form-control" name="Brand" placeholder= "Brand" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Brand" placeholder= "Brand" type="text"/>
         </div>
          <div class="form-group">
-            <input class="form-control" name="Type" placeholder= "Type" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Type" placeholder= "Type" type="text"/>
         </div>
          <div class="form-group">
-            <input class="form-control" name="Shade" placeholder= "Shade" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Shade" placeholder= "Shade" type="text"/>
         </div>
          <div class="form-group">
-            <input class="form-control" name="Size" placeholder= "Size" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Size" placeholder= "Size" type="text"/>
         </div>
          <div class="form-group">
-            <input class="form-control" name="Salesprice" placeholder= "Salesprice" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Salesprice" placeholder= "Salesprice" type="text"/>
         </div>
         <button id = "sub" class="btn btn-primary"   text-align: "center"  >Insert</button>
         
