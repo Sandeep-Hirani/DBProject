@@ -23,7 +23,7 @@
         }
         
       }else{
-        echo "no";
+         header("Location:login.php");
       }
     }
     CloseCon($conn);

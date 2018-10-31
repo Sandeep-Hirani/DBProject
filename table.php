@@ -44,7 +44,7 @@
         $out = $row['orderNo'];
         echo "<tr>";
         echo "<td class='pt-3-half' contenteditable='false'>".$row['orderNo']."</td>";
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['cusID']."</td>";
+        echo "<td class='pt-3-half' contenteditable='false'>".$row['cusID']."</td>";
         echo "<td class='pt-3-half' contenteditable='true'>".$row['orderdate']."</td>";
         if(session_id()==1){
 
@@ -53,9 +53,9 @@
         echo "<td class='pt-3-half' contenteditable='true'>".$product['ProductCode']." - ".$product['Brand']." -".$product['Type']." - ".$product['Shade']." -".$product['Size']."</td>";
         echo "<td class='pt-3-half' contenteditable='true'>".$row['quantity']."</td>";
         echo "<td class='pt-3-half' contenteditable='true'>".$row['rate']."</td>";
-        echo "<td class='pt-3-half' contenteditable='true'>".$row['amount']."</td>";
+        echo "<td class='pt-3-half' contenteditable='false'>".$row['amount']."</td>";
         echo "<td>
-             <span class='table-edit'><button type='button' onclick='editOrder(this.value)' class='btn btn-dark btn-rounded btn-sm my-0'>Save</button></span>
+             <span class='table-edit'><button type='button' class='btn btn-dark btn-rounded btn-sm my-0'>Save</button></span>
               <button type='button' onclick='delOrder($out)' class='btn btn-danger btn-rounded btn-sm my-0'>Remove</button>
           </td>";
         echo "</tr>";
@@ -114,8 +114,6 @@ var row = $(this).closest("tr");
 
 var temp = row.find('td:eq(4)').text().substring(0,2);
 var can = Number(temp);
-
-alert(can);
 var c0 = row.find('td:eq(0)').text();
 var c2 = row.find('td:eq(1)').text();
 var c3 = row.find('td:eq(2)').text();
