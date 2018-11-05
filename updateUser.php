@@ -12,12 +12,9 @@
 			$conn = OpenCon();
 			$varPHP = $_GET['varJS'];
 			$sql = "SELECT * FROM users_13142 WHERE Id='$varPHP'";    
-    		$result = mysqli_query($conn, $sql);
-
-		
-	$row = mysqli_fetch_array($result);
-    		
-
+    	$result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_array($result);
+      $r  = mysqli_fetch_array(mysqli_query($conn, "SELECT * from salesperson_13142 where ID = '$varPHP'"));
 	?>
 	<nav class="container p-5">  
   <form action="finalUser.php" method="post">
@@ -31,6 +28,12 @@
         </div>
          <div class="form-group">
             <input class="form-control" name="Active" placeholder=<?php echo $row['Active'] ?> type="text"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="Name" placeholder=<?php echo $r['Name'] ?> type="text"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="Contact" placeholder=<?php echo $r['ContactNo'] ?> type="text"/>
         </div>
          <div class="form-group">
             <input class="form-control" name="Salesperson" placeholder=<?php echo $row['Salesperson'] ?> type="text"/>

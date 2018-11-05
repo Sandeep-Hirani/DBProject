@@ -69,6 +69,7 @@ var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 function javafunction(val3){
 var table = document.getElementById('myTable');
 var row = table.rows[table.rows.length-1];
+alert('doit');
 var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 if(val3 ==1 )
 {
@@ -78,7 +79,7 @@ if(val3 ==1 )
   var c7 =row.cells[6].innerHTML;
   var c8 =row.cells[5].innerHTML * row.cells[6].innerHTML;
 } else{
-       var c4 = val3;
+       var c4 = val3; 
   // var c5 =
   var c6 =row.cells[4].innerHTML;
   var c7 =row.cells[5].innerHTML;
@@ -98,6 +99,7 @@ if(val3 ==1 )
         c8:c8
       },
       success:function(data){
+        alert('update');
               $('#content').load("table.php",{var: custID});},
           
     });

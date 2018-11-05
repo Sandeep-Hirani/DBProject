@@ -24,7 +24,7 @@
          <div class="form-group">
             <input autocomplete="off" required autofocus class="form-control" name="Country" placeholder= "Country" type="text"/></div>
         <div class="form-group">
-            <select class="form-control" name="assigned">
+            <select required class="form-control" name="assigned">
         <option disabled="" selected="" value="">Assign Salesperson</option> 
                         <?php
                        include 'connection.php';

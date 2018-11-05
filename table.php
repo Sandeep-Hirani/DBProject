@@ -74,7 +74,7 @@
            ?>
   
           <td> 
-            <select class="form-control" id = "assigned" name="assigned" onchange='changeAction(this.value, <?php echo $sessionID; ?> )'>
+            <select required class="form-control" id = "assigned" name="assigned" onchange='changeAction(this.value, <?php echo $sessionID; ?> )'>
             <option disabled="" selected="" value="">Select Product</option> 
                         <?php
                         $result1 = mysqli_query($conn, "SELECT * FROM product_13142 ");

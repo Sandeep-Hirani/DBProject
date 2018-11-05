@@ -27,7 +27,7 @@
             <input autocomplete="off" required autofocus class="form-control" name="Size" placeholder= "Size" type="text"/>
         </div>
          <div class="form-group">
-            <input autocomplete="off" required autofocus class="form-control" name="Salesprice" placeholder= "Salesprice" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Salesprice" placeholder= "Salesprice" type="number" min="1" style="width: 65em"/>
         </div>
         <button id = "sub" class="btn btn-primary"   text-align: "center"  >Insert</button>
         

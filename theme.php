@@ -34,6 +34,7 @@
                         <?php
                         
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/show.php">Customer</a></li>';
+                                echo '  <li class="nav-item"><a class="nav-link" href="/Database/sperson.php">SalesPerson</a></li>';
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/product.php">Add Product</a></li>';
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesreturn.php">Sales Return</a></li>';
                             if (session_id()==1) {
