@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
+
             if (session_status() != PHP_SESSION_NONE) {
-               echo "string";
-                unset($_SESSION['user']);
+                 echo "string";
+                 unset($_SESSION['user']);
                  unset($_SESSION['pass']);
                  session_destroy();
                  //header('Location: login.php');
-}
+             }
  ?>
 <head>        <!-- Required meta tags -->
         <meta charset="utf-8"/>

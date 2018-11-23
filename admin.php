@@ -24,7 +24,8 @@
     include 'connection.php';
 extract($_POST); 
  
-  $data =  '<table Class ="table table-striped">
+  $data =  '<div Class ="table table-striped">
+  <table  align="center" border="3" width="600">
             <tr class>
                 <th>Customer Name</th> 
                 
@@ -51,7 +52,7 @@ extract($_POST);
         </td></tr>';
   	  }	
 	}  
-    $data .= '</table>';
+    $data .= '</table></div>';
     echo $data;
     CloseCon($conn);
 ?>

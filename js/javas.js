@@ -69,7 +69,6 @@ var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 function javafunction(val3){
 var table = document.getElementById('myTable');
 var row = table.rows[table.rows.length-1];
-alert('doit');
 var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 if(val3 ==1 )
 {
@@ -99,7 +98,6 @@ if(val3 ==1 )
         c8:c8
       },
       success:function(data){
-        alert('update');
               $('#content').load("table.php",{var: custID});},
           
     });

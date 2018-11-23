@@ -12,13 +12,14 @@
     VALUES ('$sid','$sname','$cname','$number','$address','$area')";
 
     if(!mysqli_query($conn,$sql)) {
-        echo 'Not Added!';
+        echo "<script type='text/javascript'>alert('ProductCode already exist');history.go(-1);</script>";
     }
     else{
         echo 'Added';
+        header("Location:product.php");
     }
 
     CloseCon($conn);
-    header("Location:product.php");
+    
 die();
 ?>

@@ -12,7 +12,7 @@
     <center>Product Insertion </center>
     <form id = "myform" action ="insertProduct.php" method="post">
         <div class="form-group">
-            <input autocomplete="off" required autofocus class="form-control" name="Id" placeholder= "Product Code" type="text"/>
+            <input autocomplete="off" required autofocus class="form-control" name="Id" placeholder= "Product Code" type="number" min="1" style="width: 65em"/>
         </div>
         <div class="form-group">
             <input autocomplete="off" required autofocus class="form-control" name="Brand" placeholder= "Brand" type="text"/>

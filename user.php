@@ -19,6 +19,17 @@
          <div class="form-group">
             <input autocomplete="off" required autofocus class="form-control" name="Active" placeholder= "Active" type="text"/>
         </div>
+        <!-- <div>
+          <label  class="form-group">One
+            <input  class="form-group" type="radio" checked="checked" name="radio">
+            <span class="checkmark"></span>
+          </label>
+
+            <label>One
+            <input type="radio" checked="checked" name="ddf">
+            <span class="checkmark"></span>
+          </label>
+        </div> -->
         <div class="form-group">
             <input autocomplete="off" required autofocus class="form-control" name="Name" placeholder= "Name" type="text"/>
         </div>

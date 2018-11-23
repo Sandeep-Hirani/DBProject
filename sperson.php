@@ -37,4 +37,4 @@ extract($_POST);
 </div>
 </div>
 
-Data can be updated or deleted in the user section
+Data can be updated or deleted in the user section and only by admin

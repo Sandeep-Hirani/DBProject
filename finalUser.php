@@ -25,9 +25,10 @@
     if($name == ""){
         $name = $r['Name'];
     }
-    if($name == ""){
-        $name = $r['ContactNo'];
+    if($contact == ""){
+        $contact = $r['ContactNo'];
     }
+     
     $sql = "UPDATE users_13142 SET Password= '$sname',Active='$cname',Salesperson='$cno'WHERE Id = '$sid'";
     $s = "UPDATE salesperson_13142 SET Name = '$name' , ContactNo = '$contact' where ID = '$sid'";
     if(!mysqli_query($conn,$sql) || !mysqli_query($conn,$s)) {
