@@ -4,17 +4,15 @@
 	$check = $_POST["c1"];
 
 if( $check == "add"){
-	$cusId = $_POST["c2"];
-	$date = $_POST["c3"];
-	$salesperson = $_POST["c4"];
-	$product = $_POST["c5"];
-	$quantity = $_POST["c6"];
-	$rate = $_POST["c7"];
-	$amount = $_POST["c8"];
-    
-    $sql = "INSERT INTO salesorder_13142 (cusID, orderdate, salesID, product, quantity,rate, amount)
-    VALUES ('$cusId','$date','$salesperson','$product','$quantity','$rate','$amount')";
-
+	$party = $_POST["c2"];
+	$inv_id = $_POST["c3"];
+	$qty = $_POST["c4"];
+	$rate = $_POST["c5"];
+	$amount = $_POST["c6"];
+	$pid = $_POST["c7"];
+    $ty = (int)$inv_id;
+    $sql = "INSERT INTO invoice_det_13142 (party_id, inv_id, qty, rate, total,return_flag, item_id)
+    VALUES ('$party','$ty','$qty','$rate','$amount', '0','$pid')";
     if(!mysqli_query($conn,$sql)) {
         echo 'Not Added!';
     }
@@ -24,7 +22,7 @@ if( $check == "add"){
 
     CloseCon($conn);
 }else if( $check == "addorder"){
-     $result = mysqli_query($conn, "SELECT max(inv_id) as id FROM  invoice_mst_13142");
+     $result = mysqli_query($conn, "SELECT max(inv_id) as id FROM  invoice_mst_13142"); 
     $ro = mysqli_fetch_array($result);
     $ord = $ro['id']+1;
     $party = $_POST["c3"];
@@ -49,7 +47,7 @@ if( $check == "add"){
     CloseCon($conn);
 }else if($check == "delete"){
 	$orderNo = $_POST["c2"];
-	 $sql = "DELETE from salesorder_13142 where orderNo = '$orderNo'";
+	 $sql = "DELETE from invoice_det_13142 where inv_det_id = '$orderNo'";
 
     if(!mysqli_query($conn,$sql)) {
         echo 'Not Added!';
@@ -91,23 +89,21 @@ if( $check == "add"){
      echo json_encode($row);
 	}
 }else if( $check == "edit"){
-	$ID = $_POST["c0"];
+	$invd_id = $_POST["c0"];
 	$cusId = $_POST["c2"];
-	$date = $_POST["c3"];
-	$salesperson = $_POST["c4"];
-	$product = $_POST["c5"];
-	$quantity = $_POST["c6"];
-	$rate = $_POST["c7"];
-	$amount = $_POST["c8"];
-    echo $cusId;
-    $sql = "UPDATE salesorder_13142 SET cusID = '$cusId', orderdate = '$date' , salesID = '$salesperson' ,  product = '$product', 
-    		quantity = '$quantity' ,rate = '$rate', amount = '$amount' WHERE orderNo = '$ID'  ";
+	$inv_id = $_POST["c3"];
+	$qty = $_POST["c4"];
+	$rate = $_POST["c5"];
+	$amount = $_POST["c6"];
+	$proc = $_POST["c7"];
+    $sql = "UPDATE invoice_det_13142 SET party_id = '$cusId', qty = '$qty' , rate = '$rate' ,  total = '$amount', 
+    		item_id = '$proc' WHERE inv_det_id = '$invd_id'  ";
 
     if(!mysqli_query($conn,$sql)) {
-        echo 'Not Added!';
+        echo 'Not Update!';
     }
     else{
-        echo 'Added';
+        echo 'Updated';
     }
 
     CloseCon($conn);

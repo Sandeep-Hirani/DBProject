@@ -1,23 +1,53 @@
 <?php 
-	include 'connection.php';
-	$conn = OpenCon();
-	$check = $_POST["c1"];
+  include 'connection.php';
+  $conn = OpenCon();
+  $check = $_POST["c1"];
 
 if( $check == "add"){
- $cusId = $_POST["c2"];
- $oNo = $_POST["c0"];
-    $date = $_POST["c3"];
-    $salesperson = $_POST["c4"];
-  //  $product = $_POST["c5"];
-    $quantity = $_POST["c6"];
-    $rate = $_POST["c7"];
-    $amount = $_POST["c8"];
-    //echo $oNo;
-    //$sq = "SELECT product from salesorder_13142 where orderNo = '$oNo' ";
-     $sq = mysqli_fetch_array(mysqli_query($conn, "SELECT product from salesorder_13142 where orderNo = '$oNo' "));
-     $product =  $sq['product'];
-      $sql = "INSERT INTO salesReturn_13142 (ordNo, rDate, saleID, proID, rQuant,rRate, rAmount, custID) 
-      VALUES ('$oNo','$date','$salesperson','$product','$quantity','$rate','$amount','$cusId')";
+  $party = $_POST["c2"];
+  $inv_id = $_POST["c3"];
+  $qty = $_POST["c4"];
+  $rate = $_POST["c5"];
+  $amount = $_POST["c6"];
+  $pid = $_POST["c7"];
+    $ty = (int)$inv_id;
+    $sql = "INSERT INTO invoice_det_13142 (party_id, inv_id, qty, rate, total,return_flag, item_id)
+    VALUES ('$party','$ty','$qty','$rate','$amount', '1','$pid')";
+    if(!mysqli_query($conn,$sql)) {
+        echo 'Not Added!';
+    }
+    else{
+        echo 'Added';
+    }
+
+    CloseCon($conn);
+}else if( $check == "addorder"){
+     $result = mysqli_query($conn, "SELECT max(inv_id) as id FROM  invoice_mst_13142"); 
+    $ro = mysqli_fetch_array($result);
+    $ord = $ro['id']+1;
+    $party = $_POST["c3"];
+    $pdate =date("Y/m/d");
+    
+    $sql = "INSERT INTO invoice_mst_13142 (INV_ID,inv_date,party_ID,return_flag) VALUES ('$ord','$pdate','$party','1')";
+    if(!mysqli_query($conn,$sql)) {
+        echo 'Not Added!';
+    }
+    else{
+        if(!mysqli_query($conn,"commit")) {
+     //   echo 'Not commited!';
+    }
+            else{
+                mysqli_query($conn,"commit");
+                //echo 'commited';
+            }
+        //echo 'Added';
+            echo $ord;
+    }
+
+    CloseCon($conn);
+}else if($check == "delete"){
+  $orderNo = $_POST["c2"];
+   $sql = "DELETE from invoice_det_13142 where inv_det_id = '$orderNo'";
 
     if(!mysqli_query($conn,$sql)) {
         echo 'Not Added!';
@@ -27,91 +57,59 @@ if( $check == "add"){
     }
 
     CloseCon($conn);
-}else if($check == "delete"){
-	$orderNo = $_POST["c2"];
-	 $sql = "DELETE from salesReturn_13142 where ordNo = '$orderNo'";
-
-    if(!mysqli_query($conn,$sql)) {
-        echo 'Not Deleted!';
-    }
-    else{
-        echo 'Deleted';
-    }
-
-    CloseCon($conn);
 }else if($check == "searchProduct"){
-	$val = $_POST["c2"];   
-    $sql = "SELECT * FROM product_13142 WHERE ProductCode = (Select product from salesorder_13142 where orderNo = '$val')";
+  $val = $_POST["c2"];   
+    $sql = "SELECT * FROM product_13142 WHERE ProductCode = '$val'";
     $result = mysqli_query($conn, $sql);
     if( $result == false)
     {
-    	echo "No table";
+      echo "No table";
     }
     else if ( mysqli_num_rows($result) > 0) 
     {
      $row = mysqli_fetch_array($result); 
      echo json_encode($row);
-  	 	
-  	}else{
-
-
-  		echo "nodata";
-  	}
-}else if($check == "saleid"){
-    $val = $_POST["c2"];   
-    $sql = "SELECT salesID from salesorder_13142 where orderNo = '$val'";
-    $result = mysqli_query($conn, $sql);
-    if( $result == false)
-    {
-        echo "No table";
-    }
-    else if ( mysqli_num_rows($result) > 0) 
-    {
-     $row = mysqli_fetch_array($result); 
-     echo json_encode($row);
-        
+      
     }else{
-        echo "cant find it";
+
+
+      echo "nodata";
     }
 }else if($check == 'searchCustomer'){
-	$val = $_POST["c2"];   
+  $val = $_POST["c2"];   
     $sql = "SELECT * FROM customers13142 WHERE cusID = '$val'";
     $result = mysqli_query($conn, $sql);
     if( $result == false)
     {
-    	echo "No table";
+      echo "No table";
     }
     else if ( mysqli_num_rows($result) > 0) 
     {
      $row = mysqli_fetch_array($result); 
      echo json_encode($row);
-	}
+  }
 }else if( $check == "edit"){
-	$ID = $_POST["c0"];
-	$cusId = $_POST["c2"];
-	$date = $_POST["c3"];
-	$salesperson = $_POST["c4"];
-	$product = $_POST["c5"];
-	$quantity = $_POST["c6"];
-	$rate = $_POST["c7"];
-	$amount = $_POST["c8"];
-    echo $cusId;
-    $sql = "UPDATE salesReturn_13142 SET custID = '$cusId', rDate = '$date' , saleID = '$salesperson' ,  proID = '$product', 
-    		rQuant = '$quantity' ,rRate = '$rate', rAmount = '$amount' WHERE ordNo = '$ID'  ";
+  $invd_id = $_POST["c0"];
+  $cusId = $_POST["c2"];
+  $inv_id = $_POST["c3"];
+  $qty = $_POST["c4"];
+  $rate = $_POST["c5"];
+  $amount = $_POST["c6"];
+  $proc = $_POST["c7"];
+    $sql = "UPDATE invoice_det_13142 SET party_id = '$cusId', qty = '$qty' , rate = '$rate' ,  total = '$amount', 
+        item_id = '$proc' WHERE inv_det_id = '$invd_id'  ";
 
     if(!mysqli_query($conn,$sql)) {
-        echo 'Not edited!';
+        echo 'Not Update!';
     }
     else{
-        echo 'edited';
+        echo 'Updated';
     }
 
     CloseCon($conn);
 }else{
-
-
-  		echo "nodata";
-  	}
+      echo "nodata";
+    }
 
 
 ?>

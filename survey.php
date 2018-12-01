@@ -67,7 +67,7 @@ table td, table th {
                         while($row = mysqli_fetch_array($result)) 
                         {
                           echo "<option value = '{$row['CName'] }'";
-                          echo ">{$row['CusID'] } - {$row['CName'] }</option>";
+                          echo ">{$row['CusID'] } - {$row['SName'] }</option>";
                         }
                       ?>
             </select>
@@ -83,10 +83,7 @@ table td, table th {
     </nav>
     <?php
 require 'vendor/autoload.php';
-
-$client = new MongoDB\Client("mongodb://localhost:27017");
-$collection = $client->survery_13142->survery;
-
+$collection = (new MongoDB\Client)->survery_13142->survery;
 $result = $collection->find();
 
 foreach ($result as $entry) {

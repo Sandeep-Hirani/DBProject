@@ -3,7 +3,15 @@
 
 <?php 
       include 'theme.php';
-    ?>
+?>
+<head>
+  <style>
+div.card {
+    font-size: 15px;
+}
+</style>
+
+</head>
 <body>
 
  <nav class="container p-5">
@@ -79,7 +87,7 @@ extract($_POST);
         <td>'.$row['Address'].'</td>
         <td>'.$row['Area'].'</td>
         <td>'.$row['Country'].'</td>
-        <td>
+        <td style="min-width:200px">
         <button onclick="edit('.$row['CusID'].')" class="btn btn-warning">Edit</button>
       
         <button onclick="DeleteUser('.$row['CusID'].')" class="btn btn-danger">Delete</button>

@@ -39,12 +39,14 @@
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesreturn.php">Sales Return</a></li>';
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/survey.php">Survey Visit</a></li>';
                             if (session_id()==1) {
-                                echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesorder.php">Sales Order</a></li>';
+                                echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesorder1.php">Sales Order</a></li>';
                                 echo '  <li class="nav-item"><a class="nav-link" href="/Database/user.php">Users</a></li>';
                             }else
                             {
-                                echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesorder.php">Sales Order</a></li>';
+                                echo '  <li class="nav-item"><a class="nav-link" href="/Database/salesorder1.php">Sales Order</a></li>';
                             }
+                            echo '  <li class="nav-item"><a class="nav-link" href="/Database/payment.php">Payments</a></li>';
+                            echo '  <li class="nav-item"><a class="nav-link" href="/Database/dashboard.php">DashBoard</a></li>';
                          ?>
                      </ul>
                     <div class="collapse navbar-collapse" id="navbar">

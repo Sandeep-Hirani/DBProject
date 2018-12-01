@@ -30,7 +30,7 @@
                         while($row2 = mysqli_fetch_array($result2)) 
                         {
                           echo "<option value = '{$row2['CusID'] }'";
-                          echo ">{$row2['CusID'] } - {$row2['CName'] }</option>";
+                          echo ">{$row2['CusID'] } - {$row2['SName'] }</option>";
                         }
                         // CloseCon($conn);
                       ?>

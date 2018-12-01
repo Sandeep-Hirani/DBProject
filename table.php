@@ -1,5 +1,4 @@
 <script type="text/javascript" src="js/javas.js"></script> 
-   <script type="text/javascript" src="js/jquery.js"></script> 
 <div class="card">  
   <div class="card-body">
     <div id="table" class="table-editable">
@@ -105,34 +104,11 @@ Sales person column is visible in Admin id, because he assigns any sales person 
 To edit, change anything in the field and click save button.(Not all fields are editable) <br / >
 The drop down menu for the will show all the products from the database.
 <script type="text/javascript">
-  function addCal(){
-var t = document.getElementById('table');
-    var v = t.rows[1].cells[1].innerHTML 
-    //var val1 =$(t.rows[2].cells[4]).text();
-    alert(v)
-     var table = document.getElementById("TableID");
- 
-for (var i = 0, row; row = table.rows[i]; i++) {   
-  //iterate through rows   
-  //rows would be accessed using the "row" variable assigned in   the for loop   
-  for (var j = 0, col; col = row.cells[j]; j++) {     
-    //iterate through columns     
-    //columns would be accessed using the "col" variable assigned in the for loop   
-    alert('da');
-  }  
-}
-
-  }
   $('.table-edit').click(function () {
-   
- // $(document).('click', '.table-edit', function(){
- // function editOrder(){ 
-      
-      var val = <?php echo session_id()?>;
-      
+
+
+var val = <?php echo session_id()?>;      
 var row = $(this).closest("tr");
-
-
 
 var temp = row.find('td:eq(4)').text().substring(0,2);
 var can = Number(temp);

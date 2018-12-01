@@ -1,4 +1,4 @@
-<script type="text/javascript" src="js/returnJS.js"></script> 
+<script type="text/javascript" src="js/javas1.js"></script> 
 <div class="card">  
   <div class="card-body">
     <div id="table" class="table-editable">
@@ -68,25 +68,26 @@
            ?>
   
           <td> 
-            <select required class="form-control" id = "assigned" name="assigned" onchange='changeAction(this.value, <?php echo $sessionID; ?> )'>
-            <option disabled="" selected="" value="">Select Product</option> 
-                        <?php
-                        $result1 = mysqli_query($conn, "SELECT * FROM product_13142 ");
+          <datalist id="pro">
+    <option value="Internet Explorer">sdas
+     <?php
+    
+         $result1 = mysqli_query($conn, "SELECT * FROM product_13142 ");
                         while($row1 = mysqli_fetch_array($result1)) 
                         {
                           echo "<option value = '{$row1['ProductCode'] }'";
-                          echo ">{$row1['ProductCode'] }- {$row1['Type'] } - {$row1['Shade'] } - {$row1['Size'] }</option>";
-                        }
-                      ?>
-            </select>
-
+                          echo ">{$row1['Brand'] }- {$row1['Type'] } - {$row1['Shade'] } - {$row1['Size'] }</option>";
+        }
+      ?>
+  </datalist>
+  <input list="pro" id=product style="width: 100%;">
           </td>
           <td class="pt-3-half" contenteditable="true">1</td>
           <!-- <td><input value = "1" class="pt-3-half" contenteditable="true" min="1" name="Quantity"  type="number" style="width: 7em"></td> -->
           <td class="pt-3-half" contenteditable="true"></td>
           <td class="pt-3-half" contenteditable="true"></td>
           <td>
-            <span class="table-add"><button id ="addButton" type="button"  onclick="javafunction(<?php echo $sessionID; ?>)" class="btn btn-primary btn-rounded btn-sm my-0">Add</button></span>
+            <span class="table-add"><button id ="addButton" type="button"  onclick="refer()" class="btn btn-primary btn-rounded btn-sm my-0">Add</button></span>
           </td>
         
         </tfoot>
@@ -99,7 +100,20 @@ Sales person column is visible in Admin id, because he assigns any sales person 
 To edit, change anything in the field and click save button.(Not all fields are editable) <br / >
 The drop down menu for the will show all the products from the database.
 <script type="text/javascript">
-
+  var coun=0;
+  $("#product").on('input', function () {
+    var val = this.value;
+    if($('#pro option').filter(function(){
+        return this.value.toUpperCase() === val.toUpperCase();        
+    }).length) {
+      // var c = 
+      coun++;
+      changeAction(val, <?php echo $sessionID; ?>);
+    }
+});
+  function refer(){
+    javafunction(<?php echo $sessionID; ?>,coun);
+  }
   $('.table-edit').click(function () {
   var val1 = "<?php echo $orNo ?>"; 
 var val = <?php echo session_id()?>;
@@ -152,4 +166,7 @@ var rate = row.find('td:eq(5)').text();
     });
   
 });
+
+
+
 </script>

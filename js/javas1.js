@@ -1,3 +1,5 @@
+
+
 var custID;
 var ordNo;
 function custInfo(val1){;
@@ -7,7 +9,7 @@ custID = val1;
 var tableC = document.getElementById('tab');
 $.ajax({
 
-      url:"salesReturnOperation.php",
+      url:"salesOrderOperation1.php",
       type:"POST",
       data:{
         c1:"addorder",
@@ -18,7 +20,7 @@ $.ajax({
         ordNo=data;
           $.ajax({
 
-      url:"salesReturnOperation.php",
+      url:"salesOrderOperation1.php",
       type:"POST",
       data:{
         c1:"searchCustomer",
@@ -32,7 +34,7 @@ $.ajax({
         tableC.rows[1].cells[4].innerHTML = data[4];
         tableC.rows[1].cells[5].innerHTML = data[5];
         tableC.rows[1].cells[6].innerHTML = data[6]; 
-        $('#content1').load("returnTable.php",{var: custID, var1: ordNo});
+         $('#content1').load("table1.php",{var: custID, var1: ordNo});
       },
           dataType:"json"
     });  
@@ -54,7 +56,7 @@ var quan = table.rows[table.rows.length-1].cells[5].innerHTML;
 var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
     $.ajax({
 
-      url:"salesReturnOperation.php",
+      url:"salesOrderOperation1.php",
       type:"POST",
       data:{
         c1:"searchProduct",
@@ -82,8 +84,10 @@ var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
           dataType:"json"
     });  
 }
-
-function javafunction(val3){
+// var count=0;
+function javafunction(val3,count){
+  alert(count);
+  count++;
 var table = document.getElementById('myTable');
 var row = table.rows[table.rows.length-1];
 var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
@@ -104,10 +108,10 @@ var amount = row.cells[5].innerHTML * row.cells[6].innerHTML;
   var qty =  row.cells[4].innerHTML;
 var rate = row.cells[5].innerHTML;
 var amount = row.cells[4 ].innerHTML * row.cells[5].innerHTML;
-var flag = 1;
 }
   $.ajax({
-      url:"salesReturnOperation.php",
+
+      url:"salesOrderOperation1.php",
       type:"POST",
       data:{
         c1: "add",
@@ -116,11 +120,11 @@ var flag = 1;
         c4: qty,
         c5: rate,
         c6: amount,
-        c7: pid,
-        c8: flag
+        c7: pid
       },
       success:function(data){
-              $('#content1').load("returnTable.php",{var: custID, var1: ordNo});},
+
+              $('#content1').load("table1.php",{var: custID, var1: ordNo});},
           
     });
 };
@@ -128,14 +132,14 @@ var flag = 1;
 function delOrder(orderNo) {
 var c2 = orderNo;
     $.ajax({
-      url:"salesReturnOperation.php",
+      url:"salesOrderOperation1.php",
       type:"POST",
       data:{
         c1:"delete",
         c2:c2
       },
           success:function(data,status){
-          $('#content1').load("returnTable.php",{var: custID, var1: ordNo});
+          $('#content1').load("table1.php",{var: custID, var1: ordNo});
       },
 
     });
@@ -143,5 +147,5 @@ var c2 = orderNo;
 };
 function editOrder(){
   
-  $('#content1').load("returnTable.php",{var: custID, var1: ordNo});
+  $('#content1').load("table1.php",{var: custID, var1: ordNo});
 }

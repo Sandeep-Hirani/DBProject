@@ -17,13 +17,12 @@
 
 		
 	$row = mysqli_fetch_array($result);
-    		
 
 	?>
 	<nav class="container p-5">  
   <form action="final.php" method="post">
    
-              <input type="hidden" name="SID" value=<?php echo $row['CusID'] ?> />
+              <input type="hidden" name="SID" value=<?php echo $row['CusID'];  ?> />
             
                 <div class="form-group">
             <input class="form-control" name="SName" placeholder= <?php echo $row['SName'] ?> type="text"/>
